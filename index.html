@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>67 Translate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>67 Translate</h1>
+
+  <textarea id="input" placeholder="Insert text here..."></textarea>
+  <br>
+  <div>
+    <button onclick="encode()">Encode</button>
+    <button onclick="decode()">Decode</button>
+  </div>
+
+  <br>
+  
+    <strong>Result:</strong>
+    <p id="output"></p>
+
+  <footer>
+    <p>© 2025 Ferits</p>
+    <div class="contact">
+      <a href="mailto:ferits@tuta.io" target="_blank">📧 Email</a>
+      <a href="https://discord.com/users/1127678527291007067" target="_blank">💬 Discord</a>
+      <a href="https://f3rits.github.io">Home</a>
+    </div>
+  </footer>
+
+  <script>
+    function encode() {
+      const text = document.getElementById('input').value;
+      let output = '';
+      for (let i = 0; i < text.length; i++) {
+        let binary = text.charCodeAt(i).toString(2).padStart(8, '0');
+        output += binary.replace(/0/g, '6').replace(/1/g, '7') + ' ';
+      }
+      document.getElementById('output').textContent = output.trim();
+    }
+
+    function decode() {
+      const input = document.getElementById('input').value.trim();
+      let output = '';
+      const groups = input.split(/\s+/);
+      for (let group of groups) {
+        let binary = group.replace(/6/g, '0').replace(/7/g, '1');
+        output += String.fromCharCode(parseInt(binary, 2));
+      }
+      document.getElementById('output').textContent = output;
+    }
+  </script>
+</body>
+</html>
